@@ -14,7 +14,6 @@ const app = express();
 // Configure middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "public"))); // Serve static files from 'public' directory
 
 // Initialize OpenAI
 const openai = new OpenAI({
@@ -176,15 +175,7 @@ app.get("/api/test", (req, res) => {
   res.json({ message: "API is working!" });
 });
 
-// ===== SERVING STATIC FILES =====
 
-// Serve the static files from the React app in production
-// For development, this would be handled by your frontend dev server
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
-// ===== ERROR HANDLING =====
 
 // Global error handler
 app.use((err, req, res, next) => {
